@@ -35,6 +35,15 @@ public enum EOperationType {
 
     abstract BigDecimal execute(final BigDecimal one, final BigDecimal other);
 
+    EOperationType from(final String op) {
+        for (EOperationType oper : EOperationType.values()) {
+            if (oper.getOp().equals(op)) {
+                return oper;
+            }
+        }
+        throw new IllegalArgumentException("Operation invalid :" + op);
+    }
+
     EOperationType(final String op) {
         this.op = op;
     }
