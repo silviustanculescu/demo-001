@@ -10,16 +10,15 @@ import java.util.regex.Pattern;
 @Service
 public class OperationSpliterService {
 
-    Pattern pattern = Pattern.compile("(\\d{1,})(\\+|-|\\*|/)(\\d{1,})");
-
     public Operation split(final String source) {
+        Pattern pattern = Pattern.compile("(\\d{1,})(\\+|-|\\*|/)(\\d{1,})");
         final Matcher matcher = pattern.matcher(source);
         if (matcher.find()) {
             final String x = matcher.group(2);
             return Operation.builder()
                     .left(Integer.valueOf(matcher.group(1)))
-                    .right(Integer.valueOf(matcher.group(3)))
-                    .op(EOperationType.valueOf(x))
+                    .right(matcher.group(3))
+                    .op(EOperationType.from(x))
                     .build();
         } else {
             return Operation.builder().left(Integer.valueOf(source)).build();

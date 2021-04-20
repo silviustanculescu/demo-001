@@ -7,6 +7,6 @@ import lombok.Getter;
 @Builder
 public class Operation {
     private Integer left;
-    private Integer right;
+    private String right;
     private EOperationType op;
 }
